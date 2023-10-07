@@ -47,10 +47,32 @@
 
             const svgWidth = svg.attr("width");
             const svgHeight = svg.attr("height");
-            const margins = { top: 10, right: 10, bottom: 50, left: 50 };
+            const margins = { top: 50, right: 10, bottom: 75, left: 75 };
 
             const chartWidth = svgWidth - margins.left - margins.right;
             const chartHeight = svgHeight - margins.top - margins.bottom;
+
+            const chartTitle = svg.append("text")
+                .attr("x", (svgWidth / 2))
+                .attr("y", 25)
+                .attr("text-anchor", "middle")
+                .style("font-size", "16px")
+                .text("Inflation-Adjusted Budget by Fiscal Year");
+
+            const xLabel = svg.append("text")
+                .attr("class", "x-axis-label")
+                .attr("x", svgWidth / 2)
+                .attr("y", svgHeight - 20) // Adjust the vertical position as needed
+                .style("text-anchor", "middle")
+                .text("Years since 1960");
+
+            const yLabel = svg.append("text")
+                .attr("class", "y-axis-label")
+                .attr("x", -svgHeight / 2)
+                .attr("y", 10) // Adjust the horizontal position as needed
+                .attr("transform", "rotate(-90)")
+                .style("text-anchor", "middle")
+                .text("Inflation-Adjusted Budget (in millions)");
 
             const annotations = svg.append("g").attr("id", "annotations");
 
@@ -198,6 +220,8 @@
                     .attr("height", chartHeight)
                     .attr("fill", (d) => (d.congress === "D" ? "blue" : "red"))
                     .attr("opacity", 0.2);
+
+                svg.append("circle").attr("cx", 600).attr("cy", 200).attr("r", 6).style("fill", "#69b3a2")
             });
         }
     </script>
